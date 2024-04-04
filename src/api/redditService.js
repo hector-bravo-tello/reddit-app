@@ -1,0 +1,40 @@
+import axios from 'axios';
+
+const BASE_URL = 'https://www.reddit.com';
+
+export const getHomePosts = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/r/home.json`);
+    return response.data.data.children;
+  } catch (error) {
+    throw new Error('Failed to fetch home posts');
+  }
+};
+
+export const getPopularPosts = async () => {
+  try {
+    const response = await axios.get(`${BASE_URL}/r/popular.json`);
+    return response.data.data.children;
+  } catch (error) {
+    throw new Error('Failed to fetch popular posts');
+  }
+};
+
+export const getPostsBySearch = async (query) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/search.json?q=${query}`);
+    return response.data.data.children;
+  } catch (error) {
+    throw new Error('Failed to search posts');
+  }
+};
+
+export const getPostDetails = async (subreddit, postId) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/r/${subreddit}/comments/${postId}.json`);
+    console.log(response);
+    return response.data[0].data.children[0].data;
+  } catch (error) {
+    throw new Error('Failed to fetch post details');
+  }
+};
