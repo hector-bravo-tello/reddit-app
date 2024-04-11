@@ -36,12 +36,13 @@ export const searchPosts = (query) => async (dispatch) => {
 export const fetchPostDetails = (subreddit, postId) => async (dispatch) => {
   try {
     dispatch(fetchPostDetailsStart());
-    const postDetails = await getPostDetails(subreddit, postId);
+    const { postDetails, comments } = await getPostDetails(subreddit, postId);
     const postWithImage = {
       ...postDetails,
       imageUrl: postDetails.url,
     };
-    dispatch(fetchPostDetailsSuccess(postWithImage));
+    //dispatch(fetchPostDetailsSuccess(postWithImage));
+    dispatch(fetchPostDetailsSuccess({ ...postWithImage, comments }));
   } catch (error) {
     dispatch(fetchPostDetailsFailure(error.message));
   }

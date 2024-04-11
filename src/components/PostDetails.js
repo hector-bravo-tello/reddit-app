@@ -40,6 +40,17 @@ const PostDetails = () => {
       <p>Score: {postDetails.score}</p>
       <p>Comments: {postDetails.num_comments}</p>
       <div className="post-content">{postDetails.selftext}</div>
+      {postDetails.comments && (
+        <div className="comments">
+          <h3>Comments</h3>
+          {postDetails.comments.map((comment, index) => (
+            <div key={index} className="comment">
+              <p>{comment.body}</p>
+              <p>— {comment.author}</p>
+            </div>
+          ))}
+        </div>
+      )}
       <Link to="/" className="button">
         Back to Home
       </Link>

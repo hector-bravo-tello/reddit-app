@@ -32,8 +32,9 @@ export const getPostsBySearch = async (query) => {
 export const getPostDetails = async (subreddit, postId) => {
   try {
     const response = await axios.get(`${BASE_URL}/r/${subreddit}/comments/${postId}.json`);
-    console.log(response);
-    return response.data[0].data.children[0].data;
+    const postDetails = response.data[0].data.children[0].data;
+    const comments = response.data[1].data.children.map(child => child.data);
+    return { postDetails, comments };
   } catch (error) {
     throw new Error('Failed to fetch post details');
   }

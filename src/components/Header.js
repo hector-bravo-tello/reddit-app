@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { searchPosts } from '../redux/actions/postsActions';
 
@@ -27,10 +27,10 @@ const Header = () => {
       <nav>
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <NavLink to="/" end className={({ isActive }) => isActive ? 'active-link' : ''}>Home</NavLink>
           </li>
           <li>
-            <Link to="/popular">Popular</Link>
+            <NavLink to="/popular" className={({ isActive }) => isActive ? 'active-link' : ''}>Popular</NavLink>
           </li>
           {/* Add more navigation items */}
         </ul>
